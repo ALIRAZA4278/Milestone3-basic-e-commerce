@@ -2,16 +2,26 @@
 
 import { useState } from "react";
 
+// Define the CartItem type for the products in the cart
+interface CartItem {
+  productId: string;
+  title: string;
+  image: string; // Typing as string, but can be adjusted if more complex
+  quantity: number;
+  price: number;
+}
+
 // Function to add product to the cart
 const addToCart = (
   productId: string,
   title: string,
-  image: string,
+  image: string,  // Ensure image is typed as string
   quantity: number,
   price: number
 ) => {
   try {
-    let existingCart: any[] = JSON.parse(localStorage.getItem("cart") || "[]");
+    // Parse the existing cart from localStorage and cast it to CartItem[]
+    let existingCart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
 
     console.log("Existing Cart before adding product: ", existingCart);
 
@@ -20,7 +30,8 @@ const addToCart = (
       existingCart = [];
     }
 
-    const productIndex = existingCart.findIndex((item: any) => item.productId === productId);
+    // Find if the product is already in the cart
+    const productIndex = existingCart.findIndex((item) => item.productId === productId);
 
     if (productIndex >= 0) {
       existingCart[productIndex].quantity += quantity;
@@ -30,6 +41,7 @@ const addToCart = (
       console.log("Updated Cart with New Product: ", existingCart);
     }
 
+    // Save the updated cart to localStorage
     localStorage.setItem("cart", JSON.stringify(existingCart));
     console.log("Cart saved to localStorage: ", existingCart);
 
@@ -49,12 +61,13 @@ const Add = ({
 }: {
   productId: string;
   title: string;
-  image: string;
+  image: string;  // Image is typed as string
   stockNumber: number;
   price: number;
 }) => {
   const [quantity, setQuantity] = useState(1);
 
+  // Handle the increase/decrease of the quantity
   const handleQuantity = (type: "i" | "d") => {
     if (type === "d" && quantity > 1) {
       setQuantity((prev) => prev - 1);
@@ -64,6 +77,7 @@ const Add = ({
     }
   };
 
+  // Handle the Add to Cart action
   const handleAddToCart = () => {
     if (quantity > 0 && quantity <= stockNumber) {
       addToCart(productId, title, image, quantity, price);

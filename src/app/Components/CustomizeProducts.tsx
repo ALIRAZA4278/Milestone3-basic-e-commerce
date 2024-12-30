@@ -3,6 +3,13 @@
 import { useState } from "react";
 import Add from "./Add";
 
+// Define the type for the product prop
+interface Product {
+  title: string;
+  image: string;
+  price: number;
+}
+
 const CustomizeProducts = ({
   product,
   productId,
@@ -10,7 +17,7 @@ const CustomizeProducts = ({
   sizeQuantities,
   totalItems,
 }: {
-  product: any;
+  product: Product;
   productId: string;
   colors: string[];
   sizeQuantities: { [key: string]: number };
@@ -18,7 +25,6 @@ const CustomizeProducts = ({
 }) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(1);
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
@@ -26,17 +32,6 @@ const CustomizeProducts = ({
 
   const handleSizeSelect = (size: string) => {
     setSelectedSize(size);
-  };
-
-  const handleQuantityChange = (change: number) => {
-    setQuantity((prevQuantity) => {
-      const newQuantity = prevQuantity + change;
-      if (newQuantity <= 0) return 1;
-      if (selectedSize && sizeQuantities[selectedSize] < newQuantity) {
-        return sizeQuantities[selectedSize];
-      }
-      return newQuantity;
-    });
   };
 
   return (

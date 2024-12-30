@@ -5,16 +5,25 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
 
+// Define the CartItem interface for the structure of each cart item
+interface CartItem {
+  productId: string;
+  title: string;
+  image: string;
+  quantity: number;
+  price: number;
+}
+
 // CartModal to display items in the cart
 const CartModal = () => {
-  const [cart, setCart] = useState<any[]>([]); // State to store cart items
+  const [cart, setCart] = useState<CartItem[]>([]); // State to store cart items
 
   // Load cart data from localStorage when the component mounts
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       try {
-        const parsedCart = JSON.parse(storedCart);
+        const parsedCart: CartItem[] = JSON.parse(storedCart);
         if (Array.isArray(parsedCart)) {
           setCart(parsedCart); // Set cart data
         }
@@ -53,9 +62,8 @@ const CartModal = () => {
         {cart.map((item) => (
           <div className="flex gap-4 border-b pb-4" key={item.productId}>
             {item.image && (
-           
               <Image
-              src={urlForImage(item.image).url()}
+                src={urlForImage(item.image).url()}
                 alt={item.title}
                 width={80}
                 height={100}
@@ -70,7 +78,7 @@ const CartModal = () => {
                     Rs. {item.price}
                   </div>
                 </div>
-        {/* <p className="text-sm text-gray-500 mt-1">Size: {item.variantId}</p> */}
+                {/* <p className="text-sm text-gray-500 mt-1">Size: {item.variantId}</p> */}
               </div>
               <div className="flex justify-between text-sm mt-2">
                 <span className="text-gray-500">Qty: {item.quantity}</span>

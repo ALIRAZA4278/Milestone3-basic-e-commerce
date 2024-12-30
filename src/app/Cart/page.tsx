@@ -8,9 +8,18 @@ import CartModal from "../Components/CartModal";
 import Breadcrumb from "../Components/Breadcrumb";
 import { urlForImage } from "@/sanity/lib/image";
 
+// Define a type for a cart item
+interface CartItem {
+  productId: string;
+  image: any; // Define a proper type for image, if possible
+  title: string;
+  price: number;
+  quantity: number;
+}
+
 const CartPage = () => {
-  const [cart, setCart] = useState<any[]>([]);  
-  const [isModalOpen, setModalOpen] = useState(false);  
+  const [cart, setCart] = useState<CartItem[]>([]);  // Updated type here
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
