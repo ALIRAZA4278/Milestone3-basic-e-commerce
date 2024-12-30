@@ -7,17 +7,17 @@ import Head from "next/head";
 
 // Next.js expects PageProps to be typed based on route parameters in App Directory
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export const revalidate = 10; // seconds
 
 // The function is async so we can wait for params
 export default async function Page({ params }: PageProps) {
-  // Directly destructure slug from params without awaiting
-  const { slug } = params;
+  // Await the params as it is a promise
+  const { slug } = await params;
 
   try {
     const query = `*[_type=='product' && slug.current==  "${slug}"] {
