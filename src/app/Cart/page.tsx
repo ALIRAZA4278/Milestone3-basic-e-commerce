@@ -11,7 +11,7 @@ import { urlForImage } from "@/sanity/lib/image";
 // Define a type for a cart item
 interface CartItem {
   productId: string;
-  image: any; // Define a proper type for image, if possible
+  image: string | { asset: { _ref: string; _type: string } }; // Adjusted for possible Sanity image object
   title: string;
   price: number;
   quantity: number;
