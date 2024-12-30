@@ -16,8 +16,8 @@ export const revalidate = 10; // seconds
 
 // The function is async so we can wait for params
 export default async function Page({ params }: PageProps) {
-  // Await the params before using them
-  const { slug } = await params;
+  // Directly destructure slug from params without awaiting
+  const { slug } = params;
 
   try {
     const query = `*[_type=='product' && slug.current==  "${slug}"] {
