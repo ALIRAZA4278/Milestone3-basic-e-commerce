@@ -49,7 +49,7 @@ const CartPage = () => {
   return (
     <>
       <div
-        className="relative bg-cover bg-center h-[calc(40vh-80px)]"
+        className="relative bg-cover bg-center h-[calc(40vh-80px)] bg-white text-black"
         style={{
           backgroundImage: "url('/ShopBackgroud.png')",
         }}
@@ -67,7 +67,7 @@ const CartPage = () => {
         {!cart.length ? (
           <div className="text-center text-lg font-semibold">Cart is Empty</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-black">
             {/* Left Section: Cart Items */}
             <div className="col-span-2 overflow-x-auto">
               <table className="w-full bg-white rounded-md shadow-md min-w-full">

@@ -3,7 +3,7 @@ import React from 'react';
 const HomeSection6 = () => {
     return (
         <div
-            className="relative bg-cover bg-center h-[calc(70vh-80px)]"
+            className="relative bg-cover bg-center h-[calc(70vh-80px)] shadow-lg"
             style={{
                 backgroundImage: "url('/HomePart6.png')",
             }}

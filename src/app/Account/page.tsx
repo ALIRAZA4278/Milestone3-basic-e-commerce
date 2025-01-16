@@ -5,7 +5,7 @@ import Breadcrumb from "../Components/Breadcrumb";
 
 const Loginpage = async () => {
   return (
-    <div className="">
+    <div className="bg-white text-black">
       {/* CAMPAIGN */}
       <div
         className="relative bg-cover bg-center h-[calc(40vh-80px)]"

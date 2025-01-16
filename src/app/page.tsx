@@ -27,7 +27,7 @@ const HomePage = async () => {
     const products: Product[] = await client.fetch(query);
 
     return (
-        <div className="">
+        <div className="bg-white text-black">
             {/* part 1 */}
             <Slider />
 
@@ -36,7 +36,7 @@ const HomePage = async () => {
                 <HomeSection2 />
             </div>
 
-            <div className="mt-12 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+            <div className="mt-12 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 bg-white">
                 <h1 className="text-4xl w-full text-center">Top Picks For You</h1>
                 <p className="w-full text-center mt-2">
                     Find a bright ideal to suit your taste with our great selection of floor and table lights

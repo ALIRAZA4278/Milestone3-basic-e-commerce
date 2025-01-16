@@ -8,7 +8,7 @@ import Breadcrumb from '../Components/Breadcrumb';
 
 const BlogPage = () => {
   return (
-    <div>
+    <div className='bg-white text-black'>
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-[calc(40vh-80px)]"

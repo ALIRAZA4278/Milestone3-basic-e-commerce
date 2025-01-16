@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import CartModal from "./CartModal";
+import Link from "next/link";
 
 const NavIcons = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -23,6 +24,15 @@ const NavIcons = () => {
 
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
+      <Link href="/Account"> 
+      <Image
+        src="/NavProfileShopping.png"
+        alt="Search Icon"
+        width={22}
+        height={22}
+        className="cursor-pointer"
+        />
+        </Link>
       <Image
         src="/Searchicon.png"
         alt="Search Icon"
