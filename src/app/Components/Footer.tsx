@@ -29,7 +29,7 @@ const Footer = () => {
               <Link href="/payment-options">Payment Options</Link>
               <Link href="/return">Return</Link>
               <Link href="/privacy-policies">Privacy Policies</Link>
-              <Link href="/terms-conditions">Terms &amp; Conditions</Link>
+              <Link href="/terms-conditions">Terms &amp; Condition</Link>
             </div>
           </div>
         </div>
