@@ -18,6 +18,7 @@ export const revalidate = 10; // seconds
 export default async function Page({ params }: PageProps) {
   // Await the params as it is a promise
   const { slug } = await params;
+  
 
   try {
     const query = `*[_type=='product' && slug.current==  "${slug}"] {
@@ -38,6 +39,8 @@ export default async function Page({ params }: PageProps) {
     if (!product) {
       return <div>Product not found</div>;
     }
+    console.log(product);
+    
 
     return (
       <>
