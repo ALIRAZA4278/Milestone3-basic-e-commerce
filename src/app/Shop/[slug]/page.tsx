@@ -5,7 +5,6 @@ import Add from "@/app/Components/Add";
 import CustomizeProducts from "@/app/Components/CustomizeProducts";
 import Head from "next/head";
 
-// Next.js expects PageProps to be typed based on route parameters in App Directory
 type PageProps = {
   params: Promise<{
     slug: string;
@@ -14,9 +13,7 @@ type PageProps = {
 
 export const revalidate = 10; // seconds
 
-// The function is async so we can wait for params
 export default async function Page({ params }: PageProps) {
-  // Await the params as it is a promise
   const { slug } = await params;
   
 
