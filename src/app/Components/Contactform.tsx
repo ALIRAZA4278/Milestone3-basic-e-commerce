@@ -46,8 +46,9 @@ const Contactform = () => {
 
         {/* Right Section */}
         <div>
-          <form className="space-y-4">
+          <form className="space-y-4" action="https://api.web3forms.com/submit" method="POST">
             <div>
+              <input type="hidden" name="access_key" value={process.env.Contact_form_access_key} />
               <label htmlFor="name" className="block text-sm font-medium mb-4">
                 Your name
               </label>

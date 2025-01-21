@@ -33,13 +33,13 @@ const NavIcons = () => {
         className="cursor-pointer"
         />
         </Link>
-      <Image
+      {/* <Image
         src="/Searchicon.png"
         alt="Search Icon"
         width={22}
         height={22}
         className="cursor-pointer"
-      />
+      /> */}
       <Image
         src="/NavHeartShopping.png"
         alt="Heart Icon"

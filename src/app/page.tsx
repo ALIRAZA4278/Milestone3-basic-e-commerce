@@ -10,6 +10,7 @@ import ProductList from "./Components/ProductList";
 import { client } from "@/sanity/lib/client";
 
 const HomePage = async () => {
+ 
     const query = `*[_type == "product" ] {
         title,
         "slug": slug.current,
@@ -23,6 +24,7 @@ const HomePage = async () => {
         featured,
         _id
     }`;
+
 
     const products: Product[] = await client.fetch(query);
 

@@ -82,7 +82,7 @@ const Add = ({
     if (quantity > 0 && quantity <= stockNumber) {
       addToCart(productId, title, image, quantity, price);
     } else {
-      alert("Selected quantity exceeds stock!");
+      alert("Select a quanity color and size");
     }
   };
 
@@ -111,9 +111,9 @@ const Add = ({
           {stockNumber < 1 ? (
             <div className="text-xs">Product is out of stock</div>
           ) : (
-            <div className="text-xs">
+          (  <div className="text-xs">
               Only <span className="text-orange-500">{stockNumber} items</span> left
-            </div>
+            </div>)  
           )}
         </div>
 

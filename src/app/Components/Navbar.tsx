@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Menu from "./Menu";
 import NavIcons from "./NavIcons";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -9,6 +10,7 @@ const Navbar = () => {
         <div className="h-full flex items-center justify-between md:hidden">
           {/* {Mobile} */}
           <Menu />
+          <SearchBar />
           <NavIcons />
         </div>
 
@@ -25,6 +27,7 @@ const Navbar = () => {
           {/* Right */}
           <div className="absolute right-28 flex items-center justify-between gap-8">
             {/* Placeholder for SearchBar */}
+            <SearchBar />
             <NavIcons />
           </div>
         </div>

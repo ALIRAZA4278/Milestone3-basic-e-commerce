@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-      "import-data": "node scripts/importSanityData.mjs"
+    "import-data": "node scripts/importSanityData.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^1.1.0",

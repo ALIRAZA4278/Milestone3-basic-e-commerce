@@ -1,11 +1,16 @@
 import Image from "next/image";
-import ShopList from "../Components/ShopList";
+import ShopList from "../Components/ShopList";  
 import DeliveryPage from "../Components/DeliveryPage";
 import Breadcrumb from "../Components/Breadcrumb";
+import Filter from "../Components/Filter";
+import { Suspense } from "react";
 
-const Shoppage = async () => {
+const Shoppage = () => {
     return (
-        <div className="bg-white" >
+        <Suspense>
+      
+    
+        <div className="bg-white">
             {/* CAMPAIGN */}
             <div
                 className="relative bg-cover bg-center h-[calc(40vh-80px)]"
@@ -20,12 +25,19 @@ const Shoppage = async () => {
                     <Image src="/ShopLogo.png" alt="Logo" width={100} height={100} />
                     <p className="text-4xl md:text-5xl font-normal mb-2">Shop</p>
 
-                <Breadcrumb />
+                    <Breadcrumb />
                 </div>
+                <Filter />
             </div>
-            <ShopList />
+
+
+            <Suspense>
+                <ShopList />
+            </Suspense>
+
             <DeliveryPage />
         </div>
+            </Suspense>
     );
 };
 
