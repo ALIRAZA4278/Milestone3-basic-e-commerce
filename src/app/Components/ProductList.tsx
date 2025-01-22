@@ -7,15 +7,15 @@ export default function ProductList({ products }: { products: Product }) {
   return (
     <Link
       href={`/Shop/${products.slug}`}
-      className="inline-block   m-4 text-black rounded-full text-lg font-semibold transition-transform transform hover:scale-110 items-center justify-center "
+      className="inline-block   m-4 text-black rounded-full text-lg font-semibold transition-transform transform hover:scale-110 items-center justify-center max-[768px]:items-center max-[768px]:justify-center max-[768px]:text-center max-[768px]:w-full max-[768px]:block max-[768px]:m-0"
     >
       {/* Image Section */}
-      <div className="relative w-[280px] h-[280px] rounded-t-2xl overflow-hidden group-hover:brightness-75 transition-all duration-300">
+      <div className="relative w-[290px] h-[320px] rounded-t-2xl overflow-hidden group-hover:brightness-75 transition-all duration-300 max-[768px]:items-center max-[768px]:justify-center max-[768px]:text-center max-[768px]:w-full max-[768px]:block ">
         <Image
           src={urlForImage(products.image).url()}
           alt={products.title}
           fill
-          className="absolute rounded-md z-10 transition-opacity ease duration-500"
+          className="absolute rounded-md z-10 transition-opacity ease duration-500 "
         />
       </div>
 
