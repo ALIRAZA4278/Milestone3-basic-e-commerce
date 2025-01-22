@@ -6,17 +6,16 @@ import Link from "next/link";
 export default function ProductList({ products }: { products: Product }) {
   return (
     <Link
-      href={`/Shop/${products.slug}`}  
-      className="inline-block px-6 py-2 text-black rounded-full text-lg font-semibold transition-transform transform hover:scale-110 "
+      href={`/Shop/${products.slug}`}
+      className="inline-block   m-4 text-black rounded-full text-lg font-semibold transition-transform transform hover:scale-110 items-center justify-center "
     >
       {/* Image Section */}
-      <div className="relative w-[100%] h-[280px] rounded-t-2xl overflow-hidden group-hover:brightness-75 transition-all duration-300 ">
+      <div className="relative w-[280px] h-[280px] rounded-t-2xl overflow-hidden group-hover:brightness-75 transition-all duration-300">
         <Image
           src={urlForImage(products.image).url()}
           alt={products.title}
           fill
-          sizes="50vw"
-          className="absolute  rounded-md z-10  transition-opacity easy duration-500 "
+          className="absolute rounded-md z-10 transition-opacity ease duration-500"
         />
       </div>
 
@@ -35,7 +34,7 @@ export default function ProductList({ products }: { products: Product }) {
             Add to Cart
           </button>
         </Link>
-      </div>  
+      </div>
 
 
       {/* Hover Overlay */}

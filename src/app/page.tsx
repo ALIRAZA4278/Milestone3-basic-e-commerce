@@ -10,7 +10,7 @@ import ProductList from "./Components/ProductList";
 import { client } from "@/sanity/lib/client";
 
 const HomePage = async () => {
- 
+
     const query = `*[_type == "product" ] {
         title,
         "slug": slug.current,
@@ -43,12 +43,12 @@ const HomePage = async () => {
                 <p className="w-full text-center mt-2">
                     Find a bright ideal to suit your taste with our great selection of floor and table lights
                 </p>
-                
-                {/* Displaying the first 4 products */}
-                {products.slice(0, 4).map((product) => (
-                    <ProductList products={product} key={product._id} />
-                ))}
-                
+
+                    {/* Displaying the first 4 products */}
+                    {products.slice(0, 4).map((product) => (
+                        <ProductList products={product} key={product._id} />
+                    ))}
+
                 <div className="h-12 w-full items-center justify-center text-center">
                     <Link href="/Shop">
                         <button className="text-black underline py-4 px-2 mt-4 xl:mt-8 text-lg lg:text-xl underline-offset-8 decoration-2">
@@ -83,4 +83,3 @@ const HomePage = async () => {
 export default HomePage;
 
 
- 
