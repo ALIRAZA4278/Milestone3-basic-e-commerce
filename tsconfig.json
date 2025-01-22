@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"  // Ensure this is correctly included
-  ],
+, "src/app/context/AuthProvider.jsx"  ],
   "exclude": [
     "node_modules"
   ]
