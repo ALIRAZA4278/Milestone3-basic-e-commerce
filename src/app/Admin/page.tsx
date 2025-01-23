@@ -10,8 +10,8 @@ interface User {
 
 const App = () => {
   const [user, setUser] = useState<User>({ role: null })
-  let LoginPassword = process.env.NEXT_PUBLIC_PASSWORD
-  let LoginAdmin = process.env.NEXT_PUBLIC_ADMIN
+  const LoginPassword = process.env.NEXT_PUBLIC_PASSWORD
+  const LoginAdmin = process.env.NEXT_PUBLIC_ADMIN
  
 
   const handleLogin = (email: string, password: string) => {
