@@ -105,7 +105,7 @@ const RightCheckOut: React.FC<RightCheckOutProps> = ({ cartItems }) => {
 
           <div className="flex items-center">
             <input type="checkbox" id="botcheck" name="botcheck" checked={isChecked} onChange={handleCheckboxChange} className="mr-2" />
-            <label htmlFor="botcheck" className="text-sm text-gray-500">I am not a robot</label>
+            <label htmlFor="botcheck" className="text-sm text-gray-500">Im not a robot</label>
           </div>
         </div>
 
