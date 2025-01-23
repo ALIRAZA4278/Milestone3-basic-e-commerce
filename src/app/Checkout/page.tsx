@@ -28,7 +28,7 @@ const CheckoutPage = () => {
         </div>
       </div>
 
-      <CheckOutform /> {/* Order Summary */}
+      <CheckOutform  /> {/* Order Summary */}
 
 
 

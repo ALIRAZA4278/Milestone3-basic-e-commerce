@@ -1,183 +1,128 @@
-import React from "react";
+// RightCheckOut.tsx
+import { client } from '@/sanity/lib/client'; 
+import React, { useState } from 'react';
 
 type CartItem = {
-    productId: string;
-    title: string;
-    price: number;
-    quantity: number;
+  productId: string;
+  title: string;
+  price: number;
+  quantity: number;
 };
 
 interface RightCheckOutProps {
-    cartItems: CartItem[];
+  cartItems: CartItem[];
 }
 
 const RightCheckOut: React.FC<RightCheckOutProps> = ({ cartItems }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
-    // Prepare cart data for submission (convert items to a string or formatted text)
-    const cartDetails = cartItems.map((item) => `${item.title} x ${item.quantity} - Rs. ${(item.price * item.quantity).toFixed(2)}`).join(", ");
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
 
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
 
-    return (
-        <div>
-            <form action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value={process.env.Contact_form_access_key} />
-                <input type="hidden" name="Order Details" value={cartDetails} />
+    const formData = new FormData(event.target as HTMLFormElement);
+    const formValues: { [key: string]: string } = {};
 
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-4">
-                        First Name
-                    </label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        className="w-full border border-gray-300 rounded-md px-6 py-6 "
-                    />
-                </div>
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-4">
-                        Last Name
-                    </label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="last Name"
-                        required
-                        className="w-full border border-gray-300 rounded-md px-6 py-6 "
-                    />
-                </div>
+    formData.forEach((value, key) => {
+      formValues[key] = value as string;
+    });
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Company Name (Optional)
-                    </label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="Company Name"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                        placeholder="This is optional"
-                    />
-                </div>
+    const orderData = {
+      ...formValues,
+      items: cartItems.map((item) => ({
+        _key: item.productId,  
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      createdAt: new Date().toISOString(),
+      status: 'Pending', 
+    };
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Country / Region
-                    </label>
-                    <input
-                        id="subject"
-                        name="Country / Region"
-                        required
-                        placeholder='Pakistan'
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
+    try {
+      const response = await client.create({
+        _type: 'order',
+        ...orderData,
+      });
 
-                </div>
+      setSubmitMessage('Order submitted successfully!');
+      console.log('Order submitted:', response);
+    } catch (error) {
+      setSubmitMessage('There was an error submitting your order.');
+      console.error('Error submitting order:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Town / City
-                    </label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="Town / City"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
-                </div>
+  return (
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-xl rounded-lg">
+      <form onSubmit={handleSubmit}>
+        <h2 className="text-2xl font-semibold text-center mb-8">Checkout Form</h2>
 
+        <div className="grid grid-cols-1 gap-4 mb-4">
+          <div>
+            <label htmlFor="name" className="block text-lg font-medium">First Name</label>
+            <input type="text" id="name" name="name" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Province
-                    </label>
-                    <input
-                        id="subject"
-                        name="  Province"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
+          <div>
+            <label htmlFor="lastName" className="block text-lg font-medium">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
-                </div>
+          <div>
+            <label htmlFor="email" className="block text-lg font-medium">Email Address</label>
+            <input type="email" id="email" name="email" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Zip Code
-                    </label>
-                    <input
-                        type="number"
-                        id="subject"
-                        name="Zip Code"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
-                </div>
+          <div>
+            <label htmlFor="phone" className="block text-lg font-medium">Phone Number</label>
+            <input type="text" id="phone" name="phone" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
+          <div>
+            <label htmlFor="address" className="block text-lg font-medium">Address</label>
+            <textarea id="address" name="address" required className="w-full p-3 border rounded-md shadow-sm" rows={4}></textarea>
+          </div>
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Phone
-                    </label>
-                    <input
-                        type="number"
-                        id="subject"
-                        name="Phone"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
-                </div>
+          <div>
+            <label htmlFor="city" className="block text-lg font-medium">City</label>
+            <input type="text" id="city" name="city" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Email Address
-                    </label>
-                    <input
-                        type="email"
-                        id="subject"
-                        name=" Email Address"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                    />
-                </div>
+          <div>
+            <label htmlFor="country" className="block text-lg font-medium">Country</label>
+            <input type="text" id="country" name="country" required className="w-full p-3 border rounded-md shadow-sm" />
+          </div>
 
-
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Address
-                    </label>
-                    <textarea
-                        id="Address"
-                        name="Address"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                        placeholder="Address"
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-4">
-                        Additional information
-                    </label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        className="w-full border border-gray-300 rounded-md px-4 py-6"
-                        placeholder="Additional information"
-                    ></textarea>
-                </div>
-
-
-                {/* Honeypot Spam Protection */}
-                <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
-
-                {/* Custom Confirmation / Success Page */}
-                {/* <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html" /> */}
-
-                <button
-                    type="submit"
-                    className="w-full bg-transparent text-black border-4 border-gray-300 rounded-full py-4 px-4 hover:bg-gray-800 hover:text-white"
-                >
-                    Submit
-                </button>
-            </form>
+          <div className="flex items-center">
+            <input type="checkbox" id="botcheck" name="botcheck" checked={isChecked} onChange={handleCheckboxChange} className="mr-2" />
+            <label htmlFor="botcheck" className="text-sm text-gray-500">I am not a robot</label>
+          </div>
         </div>
 
-    )
-}
+        <div className="text-center mt-4">
+          <button type="submit" disabled={isSubmitting} className="w-full bg-yellow-600 text-white py-3 rounded-md hover:bg-yellow-700 transition-colors duration-300">
+            {isSubmitting ? 'Submitting...' : 'Submit Order'}
+          </button>
+        </div>
+        
+        {submitMessage && (
+          <div className="mt-6 text-center text-lg text-blue-600">
+            {submitMessage}
+          </div>
+        )}
+      </form>
+    </div>
+  );
+};
 
-export default RightCheckOut
+export default RightCheckOut;

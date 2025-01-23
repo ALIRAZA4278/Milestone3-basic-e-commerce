@@ -45,9 +45,12 @@ const HomePage = async () => {
                 </p>
 
                     {/* Displaying the first 4 products */}
+                    <div className="flex items-center justify-center flex-wrap   ">
                     {products.slice(0, 4).map((product) => (
+
                         <ProductList products={product} key={product._id} />
                     ))}
+                    </div>
 
                 <div className="h-12 w-full items-center justify-center text-center">
                     <Link href="/Shop">
