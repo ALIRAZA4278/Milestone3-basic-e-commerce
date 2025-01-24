@@ -16,7 +16,7 @@ const Header = () => {
         <div className="text-sm font-semibold max-[768px]:hidden">
         <Link href="/Shop">
           <button className="bg-yellow-500 text-gray-800 py-1 px-4 rounded hover:bg-yellow-600 focus:outline-none">
-            Order Now
+            Admin
           </button>
           </Link>  
         </div>
@@ -24,8 +24,8 @@ const Header = () => {
         {/* Profile Section */}
         <div className="text-sm">
           
-        <Link href="/Userprofile">
-          <span>👤 View Your Profile</span>
+        <Link href="/Orders">
+          <span>👤 View Your Orders</span>
           </Link>
         </div>
         
